@@ -301,7 +301,7 @@ if __name__ == '__main__':
     if 1:
         os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3,5'
         freeze = False
-        model_name = 'senet50'
+        model_name = 'resnet101'
         fold_index = 1
         min_num_class = 10
         checkPoint_start = 0
