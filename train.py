@@ -1,8 +1,9 @@
 import datetime
 import os
+import reader 
+import transform
 
 from timeit import default_timer as timer
-from dataSet import *
 from models import *
 import torch
 import time
