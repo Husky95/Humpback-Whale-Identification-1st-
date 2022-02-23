@@ -153,7 +153,7 @@ class WhaleTestDataset(Dataset):
         return len(self.names)
 
     def get_image(self, name, transform, mode='train'):
-        image = cv2.imread('./input/train_images/{}'.format(name))
+        image = cv2.imread('/kaggle/input/train_images/{}'.format(name))
         try:
             mask = do_length_decode(self.rle_masks[name.split('.')[0]]['rle_mask'])
             mask = cv2.resize(mask, image.shape[:2][::-1])
