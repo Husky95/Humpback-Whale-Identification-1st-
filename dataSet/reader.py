@@ -30,8 +30,8 @@ class WhaleDataset(Dataset):
         self.mode = mode
         self.transform_train = transform_train
         self.labels_dict = self.load_labels()
-        self.bbox_dict = self.load_bbox()
-        self.rle_masks = self.load_mask()
+        #self.bbox_dict = self.load_bbox()
+        #self.rle_masks = self.load_mask()
         self.id_labels = {Image:Id for Image, Id in zip(self.names, self.labels)}
         labels = []
         for label in self.labels:
