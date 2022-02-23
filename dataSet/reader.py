@@ -95,7 +95,7 @@ class WhaleDataset(Dataset):
     def get_image(self, name, transform, label, mode='train'):
         mode_dir = ''
         if mode == 'train':
-            mode_dir = 'train_images
+            mode_dir = 'train_images'
             
         image = cv2.imread('/kaggle/input/{}/{}'.format(mode_dir, name))
         # for Pseudo label
