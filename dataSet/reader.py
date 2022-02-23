@@ -144,8 +144,8 @@ class WhaleTestDataset(Dataset):
         self.names = names
         self.labels = labels
         self.mode = mode
-        self.bbox_dict = self.load_bbox()
-        self.labels_dict = self.load_labels()
+        #self.bbox_dict = self.load_bbox()
+        #self.labels_dict = self.load_labels()
         self.rle_masks = self.load_mask()
         self.transform = transform
 
@@ -153,7 +153,7 @@ class WhaleTestDataset(Dataset):
         return len(self.names)
 
     def get_image(self, name, transform, mode='train'):
-        image = cv2.imread('./input/{}/{}'.format(mode, name))
+        image = cv2.imread('./input/train_images/{}'.format(name))
         try:
             mask = do_length_decode(self.rle_masks[name.split('.')[0]]['rle_mask'])
             mask = cv2.resize(mask, image.shape[:2][::-1])
@@ -161,9 +161,9 @@ class WhaleTestDataset(Dataset):
             mask = cv2.imread('./input/masks/' + name, cv2.IMREAD_GRAYSCALE)
         if mask is None:
             mask = np.zeros_like(image[:, :, 0])
-        x0, y0, x1, y1 = self.bbox_dict[name]
-        image = image[int(y0):int(y1), int(x0):int(x1)]
-        mask = mask[int(y0):int(y1), int(x0):int(x1)]
+        #x0, y0, x1, y1 = self.bbox_dict[name]
+        #image = image[int(y0):int(y1), int(x0):int(x1)]
+        #mask = mask[int(y0):int(y1), int(x0):int(x1)]
         image = transform(image, mask)
         return image
 
