@@ -70,7 +70,7 @@ class WhaleDataset(Dataset):
         return bbox_dict
 
     def load_labels(self):
-        label = pd.read_csv('./input/label.csv')
+        label = pd.read_csv('/kaggle/input/whalelabel/label.csv')
         labelName = label['name'].tolist()
         dict_label = {}
         id = 0
@@ -93,7 +93,11 @@ class WhaleDataset(Dataset):
         return len(self.labels)
 
     def get_image(self, name, transform, label, mode='train'):
-        image = cv2.imread('./input/{}/{}'.format(mode, name))
+        mode_dir = ''
+        if mode == 'train':
+            mode_dir = 'train_images
+            
+        image = cv2.imread('/kaggle/input/{}/{}'.format(mode_dir, name))
         # for Pseudo label
         if image is None:
             image = cv2.imread('./input/test/{}'.format(name))
@@ -102,11 +106,11 @@ class WhaleDataset(Dataset):
             mask = cv2.resize(mask, image.shape[:2][::-1])
         except:
             mask = cv2.imread('./input/masks/' + name, cv2.IMREAD_GRAYSCALE)
-        x0, y0, x1, y1 = self.bbox_dict[name]
+        #x0, y0, x1, y1 = self.bbox_dict[name]
         if mask is None:
             mask = np.zeros_like(image[:,:,0])
-        image = image[int(y0):int(y1), int(x0):int(x1)]
-        mask = mask[int(y0):int(y1), int(x0):int(x1)]
+        #image = image[int(y0):int(y1), int(x0):int(x1)]
+        #mask = mask[int(y0):int(y1), int(x0):int(x1)]
         image, add_ = transform(image, mask, label)
         return image, add_
 
