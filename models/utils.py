@@ -92,6 +92,8 @@ def try_bestfitting_loss(results, labels, selected_num=10):
     labels = labels.view(-1)
     indexs_new = (labels != 15587).nonzero().view(-1)
     if len(indexs_new) == 0:
+         print("best fitting len(index_new == 0")
+
         return error_loss
     results_nonew = results[torch.arange(0, len(results))[indexs_new], labels[indexs_new]].contiguous()
     target_nonew = torch.ones_like(results_nonew).float().cuda()
@@ -112,7 +114,8 @@ def sigmoid_loss(results, labels, topk=10):
     error_loss = nn.BCELoss(reduce=True)(error, target_error)
     labels = labels.view(-1)
     indexs_new = (labels != 15587).nonzero().view(-1)
-    if len(indexs_new) == 0:
+    if True:
+    #if len(indexs_new) == 0:
         print("len(index_new == 0")
         return error_loss
     results_nonew = results[torch.arange(0, len(results))[indexs_new], labels[indexs_new]].contiguous()
