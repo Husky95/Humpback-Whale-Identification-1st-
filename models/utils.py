@@ -93,8 +93,7 @@ def try_bestfitting_loss(results, labels, selected_num=10):
     indexs_new = (labels != 15587).nonzero().view(-1)
     if len(indexs_new) == 0:
          print("best fitting len(index_new == 0")
-
-        return error_loss
+         return error_loss
     results_nonew = results[torch.arange(0, len(results))[indexs_new], labels[indexs_new]].contiguous()
     target_nonew = torch.ones_like(results_nonew).float().cuda()
     nonew_loss = nn.BCEWithLogitsLoss(reduce=True)(results_nonew, target_nonew)
